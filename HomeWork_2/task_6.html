@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* Задание 6.
+        Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation), где arg1, arg2 – значения аргументов, operation – строка с названием операции.
+        В зависимости от переданного значения операции выполнить одну из арифметических операций (использовать функции из пункта 3) и вернуть полученное значение (использовать switch).
+        */
+        function my_sum(a, b){
+            return a + b;
+        }
+
+        function my_sub(a, b){
+            return a - b;
+        }
+
+        function my_mult(a, b){
+            return a * b;
+        }
+
+        function my_div(a, b){
+            return a / b;
+        }
+
+        function mathOperation(arg1, arg2, operation){
+            switch (operation){
+                case 'sum':
+                    return my_sum(arg1, arg2);
+                    break;
+                case 'sub':
+                    return my_sub(arg1, arg2);
+                    break;
+                case 'mult':
+                    return my_mult(arg1, arg2);
+                    break;
+                case 'div':
+                    return my_div(arg1, arg2);
+                    break;
+            }
+        }
+
+        let a = 10;
+        let b = 2;
+        
+        alert(`Сумма = ${mathOperation(a,b,'sum')} \n Разность = ${mathOperation(a,b,'sub')} \n Произведение = ${mathOperation(a,b,'mult')} \n Деление = ${mathOperation(a,b,'div')}`);
+    </script>
+</body>
+</html>

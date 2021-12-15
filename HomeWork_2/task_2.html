@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Задание 2. Чему будет равен x в примере ниже?
+        var a = 2;
+        var x = 1 + (a *= 2);
+        /*
+        Сначала выполняется действие в скобках: a *= 2 => a = a * 2 => a = 4
+        Далее к 1 прибавляется результат действия в скобках: 1 + 4 = 5
+        */
+       alert(x) // 5
+    </script>
+</body>
+</html>
