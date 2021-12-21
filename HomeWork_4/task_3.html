@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 3. Подумать над глобальными сущностями.
+        К примеру, сущность «Продукт» в интернет-магазине актуальна не только для корзины, но и для каталога.
+        Стремиться нужно к тому, чтобы объект «Продукт» имел единую структуру для различных модулей сайта, но в разных местах давал возможность вызывать разные методы.
+        */
+        function countCartPrice(cart){
+            let totalPrice = 0
+            for (let item of cart){
+                totalPrice += products[item.productId].price * item.quantity;
+            }
+            return totalPrice;
+        }
+
+       let products = {
+           1: {id: 1, name: 'Product 1', price: 100},
+           2: {id: 2, name: 'Product 2', price: 200},
+           3: {id: 3, name: 'Product 3', price: 300},
+           4: {id: 4, name: 'Product 4', price: 400},
+           5: {id: 5, name: 'Product 5', price: 500}
+       };
+
+       let catalogs = [
+           {name: 'Catalog 1', products: [1, 2, 3]},
+           {name: 'Catalog 2', products: [3, 4, 5]},
+       ];
+
+       let cart = [
+           {productId: 1, quantity: 1},
+           {productId: 2, quantity: 3},
+       ];
+
+       alert(`Стоимость корзины ${countCartPrice(cart)}`);
+    </script>
+</body>
+</html>
