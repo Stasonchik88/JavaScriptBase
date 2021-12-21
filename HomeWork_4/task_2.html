@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 2. Продолжить работу с интернет-магазином:
+        В прошлом домашнем задании вы реализовали корзину на базе массивов. Какими объектами можно заменить их элементы?
+        Реализуйте такие объекты.
+        Перенести функционал подсчета корзины на объектно-ориентированную базу.
+        */
+        function countCartPrice(cart){
+            let totalPrice = 0
+            for (let item of cart){
+                totalPrice += item.price;
+            }
+            return totalPrice;
+        }
+
+        let cart = [
+            {name: "product 1", price: 100},
+            {name: "product 2", price: 200},
+            {name: "product 3", price: 300},
+            {name: "product 4", price: 400},
+            {name: "product 5", price: 500},
+        ];
+
+        alert(`Стоимость корзины ${countCartPrice(cart)}`);
+    </script>
+</body>
+</html>
