@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="catalogs"></div>
+    <div id="cart"></div>
+    <script>
+        /*2. Сделать генерацию корзины динамической: верстка корзины не должна находиться в HTML-структуре.
+        Там должен быть только div, в который будет вставляться корзина, сгенерированная на базе JS:
+            Пустая корзина должна выводить строку «Корзина пуста»;
+            Наполненная должна выводить «В корзине: n товаров на сумму m рублей».
+        
+        4. (*) Сделать так, чтобы товары в каталоге выводились при помощи JS:
+        Создать массив товаров (сущность Product);
+        При загрузке страницы на базе данного массива генерировать вывод из него. HTML-код должен содержать только div id=”catalog” без вложенного кода. Весь вид каталога генерируется JS.
+        */
+        function countCartPrice(cart){
+            let totalPrice = 0
+            for (let item of cart){
+                totalPrice += products[item.productId].price * item.quantity;
+            }
+            return totalPrice;
+        }
+
+        let products = {
+            1: {id: 1, name: 'Product 1', price: 100},
+            2: {id: 2, name: 'Product 2', price: 200},
+            3: {id: 3, name: 'Product 3', price: 300},
+            4: {id: 4, name: 'Product 4', price: 400},
+            5: {id: 5, name: 'Product 5', price: 500}
+        };
+
+        let catalogs = [
+            {name: 'Catalog 1', products: [1, 2, 3]},
+            {name: 'Catalog 2', products: [3, 4, 5]},
+        ];
+
+        for (let catalog of catalogs){
+            let new_catalog = document.createElement('div');
+
+            let new_catalog_title = document.createElement('span')
+            new_catalog_title.textContent = catalog.name;
+            new_catalog_title.style = 'font-weight: bold'
+            new_catalog.appendChild(new_catalog_title);
+
+            for (productId of catalog.products){
+                let new_product = document.createElement('p');
+                new_product.textContent = `${products[productId].name}`;
+                new_catalog.appendChild(new_product);
+            }
+            window.catalogs.appendChild(new_catalog);
+        }
+
+        let cart = [
+            {productId: 1, quantity: 1},
+            {productId: 2, quantity: 3},
+        ];
+
+        let message = "Корзина пуста!"
+        if (cart.length !== 0){
+            message = `В корзине ${cart.length} товаров на сумму ${countCartPrice(cart)} рублей`;
+        }
+
+        let new_cart = document.createElement('span');
+        new_cart.textContent = message;
+        new_cart.style = 'font-weight: bold'
+        window.cart.appendChild(new_cart);
+    </script>
+</body>
+</html>
