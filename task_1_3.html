@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table style="border: 1px solid;">
+        <tbody id="table"></tbody>
+    </table>
+    <script>
+        /*1. Создать функцию, генерирующую шахматную доску.
+        Можно использовать любые html-теги.
+        Доска должна быть верно разлинована на черные и белые ячейки.
+        Строки должны нумероваться числами от 1 до 8, столбцы — латинскими буквами A, B, C, D, E, F, G, H.
+
+        3. (*) Заполнить созданную таблицу буквами, отвечающими за шахматную фигуру, например К – король, Ф – ферзь и т.п.,
+        причем все фигуры должны стоять на своих местах и быть соответственно черными и белыми.
+        */
+        let chars = [
+            ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',],
+            ['1', 'Л', 'К', 'С', 'Ф', 'Кр', 'С', 'К','Л',],
+            ['2', 'п', 'п', 'п', 'п', 'п', 'п', 'п','п',],
+            ['3', '', '', '', '', '', '', '','',],
+            ['4', '', '', '', '', '', '', '','',],
+            ['5', '', '', '', '', '', '', '','',],
+            ['6', '', '', '', '', '', '', '','',],
+            ['7', 'п', 'п', 'п', 'п', 'п', 'п', 'п','п',],
+            ['8', 'Л', 'К', 'С', 'Кр', 'Ф', 'С', 'К','Л',],
+        ];
+        let new_row;
+        let new_cell;
+        let colorCell;
+        let colorFont;
+        for (i = 0; i < 9; i++){
+            new_row = document.createElement('tr');
+            for (j = 0; j < 9; j++){
+                colorCell = 'white';
+                if (i != 0 && j != 0){colorCell = ((i + j) % 2 != 0) ? 'black' : 'white'};
+                colorFont = (i > 0 && i < 3 && j > 0) ? 'white' : 'black';
+                colorShadow = (colorCell == 'black') ? 'white' : 'black';
+                new_cell = document.createElement('td');
+                new_cell.style = `width: 100px; height: 100px; border: 1px solid black; text-align: center; background-color: ${colorCell}; font-weight: bold; color: ${colorFont}; text-shadow: 1px 1px 1px ${colorShadow}`;
+                new_cell.textContent = chars[i][j];
+                new_row.appendChild(new_cell);
+            }
+            table.appendChild(new_row);
+        }
+    </script>
+</body>
+</html>
