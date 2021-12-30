@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="catalogs"></div>
+    <div id="cart"></div>
+    <script>
+        /* 1.
+        a. Добавлять в объект корзины выбранные товары по клику на кнопке «Купить» без перезагрузки страницы;
+        b. Привязать к событию покупки товара пересчет корзины и обновление ее внешнего вида.
+        */
+        function countCartPrice(cart){
+            let totalPrice = 0
+            for (let item of cart){
+                totalPrice += products[item.productId].price * item.quantity;
+            }
+            return totalPrice;
+        }
+
+        function addProductInCart(event){
+            let eventElement = event.target
+            let prodId = eventElement.id.split('_')[2]
+            if (cart[prodId] > 0){
+                cart[prodId]++
+            }else{
+                cart.push({productId: prodId, quantity: 1})
+            }
+            
+            message = `В корзине ${cart.length} товаров на сумму ${countCartPrice(cart)} рублей`;
+            span_cart = document.getElementById('spanCart')
+            span_cart.textContent = message
+        }
+
+        let products = {
+            1: {id: 1, name: 'Product 1', price: 100},
+            2: {id: 2, name: 'Product 2', price: 200},
+            3: {id: 3, name: 'Product 3', price: 300},
+            4: {id: 4, name: 'Product 4', price: 400},
+            5: {id: 5, name: 'Product 5', price: 500}
+        };
+
+        let catalogs = [
+            {name: 'Catalog 1', products: [1, 2, 3]},
+            {name: 'Catalog 2', products: [3, 4, 5]},
+        ];
+
+        for (let catalog of catalogs){
+            let new_catalog = document.createElement('div');
+
+            let new_catalog_title = document.createElement('span')
+            new_catalog_title.textContent = catalog.name;
+            new_catalog_title.style = 'font-weight: bold'
+            new_catalog.appendChild(new_catalog_title);
+
+            let tableCatalog = document.createElement('tbody')
+            let rowInTableCatalog = document.createElement('tr')
+            for (productId of catalog.products){
+                let new_product = document.createElement('td');
+                new_product.style = 'width: 100px; height: 100px; border: 1px solid black; text-align: center;';
+                new_product.textContent = `${products[productId].name}`;
+
+                btnBuy = document.createElement('button')
+                btnBuy.id = `buy_product_${productId}`
+                btnBuy.textContent = `Купить: ${products[productId].price}`
+                btnBuy.onclick = addProductInCart
+                new_product.appendChild(btnBuy)
+
+                rowInTableCatalog.appendChild(new_product);
+            }
+            tableCatalog.appendChild(rowInTableCatalog);
+            new_catalog.appendChild(tableCatalog)
+            window.catalogs.appendChild(new_catalog);
+        }
+
+        let cart = [];
+        let message = "Корзина пуста!"
+        let new_cart = document.createElement('span');
+        new_cart.id = 'spanCart'
+        new_cart.textContent = message;
+        new_cart.style = 'font-weight: bold'
+        window.cart.appendChild(new_cart);
+    </script>
+</body>
+</html>
